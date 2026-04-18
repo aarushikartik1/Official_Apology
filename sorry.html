@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --soft-green: #e1eedd;
+            --eucalyptus: #95ad95;
+            --blush: #f7d8d8;
+            --beige: #f9f6f0;
+            --koala-grey: #a8a8a8;
+            --text-color: #5a5a5a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body {
+            background-color: var(--beige);
+            color: var(--text-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .leaf {
+            position: fixed;
+            top: -10%;
+            z-index: -1;
+            font-size: 24px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(180deg, var(--soft-green) 0%, var(--beige) 100%);
+        }
+
+        .hero-koala {
+            font-size: 80px;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 20px;
+        }
+
+        .hero-koala:active { transform: scale(1.4) rotate(15deg); }
+
+        h1 { font-size: 2.5rem; color: var(--eucalyptus); margin-bottom: 15px; }
+        .subtext { font-size: 1.1rem; max-width: 500px; line-height: 1.6; }
+
+        .reasons-container {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h2 { text-align: center; margin-bottom: 40px; color: var(--eucalyptus); }
+
+        .reason-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--soft-green);
+        }
+
+        .reason-card:hover { transform: translateY(-5px); }
+        .icon { font-size: 30px; }
+
+        .action-zone {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--blush);
+        }
+
+        #forgiveBtn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background-color: white;
+            border: none;
+            border-radius: 50px;
+            color: var(--text-color);
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        #forgiveBtn:hover { transform: scale(1.1); background-color: var(--soft-green); }
+
+        #responseMsg {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.9rem;
+            color: var(--eucalyptus);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .reason-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="leaves-container"></div>
+
+    <header>
+        <div class="hero-koala" title="Click me!">🐨</div>
+        <h1>I’m Really Sorry</h1>
+        <p class="subtext">
+            I just wanted to say that im very very very very very sorry my love. I know i let other things affect us, and i acted in a way i shouldnt have and i know i hurt your feelings. <br><br> This is just a small thing that i made to try to make up for all the big mistakes i did
+        </p>
+    </header>
+
+    <section class="reasons-container">
+        <h2>10 Reasons Why You Should Forgive Me</h2>
+        <div id="reasons-list"></div>
+    </section>
+
+    <section class="action-zone">
+        <button id="forgiveBtn">Will You Forgive Me?</button>
+        <div id="responseMsg">
+            <div style="font-size: 50px;"></div>
+            <p>Thank you hehehehehe. I love you soooooooooo much</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>I’ll do better. Pinky Promise.</p>
+    </footer>
+
+    <script>
+        const reasons = [
+            "I am your boyfriend",
+            "I'll buy you flowers and a box of ferrero rocher as a peace offering.",
+            "I've realized my brain is a little fuzzy and turns into a cloud kabhi kabhi",
+            "I can not do anything without you (even if i try)",
+            "You will get someone you can beat up with your diamond vali stick firse",
+            "I will put up posters and flags of you in my room",
+            "I will post a detailed note telling everyone how much i love you and everything i love about you on instagram",
+            "I love you",
+            "You love me even more hehe",
+            "your boyfriend can be a little stoopid and dumb kabhi kabhi"
+        ];
+
+        const listContainer = document.getElementById('reasons-list');
+        reasons.forEach((text, i) => {
+            const card = document.createElement('div');
+            card.className = 'reason-card';
+            card.innerHTML = `<span class="icon">🌿</span><p>${text}</p>`;
+            listContainer.appendChild(card);
+        });
+
+        const btn = document.getElementById('forgiveBtn');
+        const msg = document.getElementById('responseMsg');
+        
+        btn.addEventListener('click', () => {
+            btn.style.display = 'none';
+            msg.style.display = 'block';
+            createConfetti();
+        });
+
+        function createLeaf() {
+            const leafSymbols = ['🌿', '🍃', '🌱'];
+            const leaf = document.createElement('div');
+            leaf.className = 'leaf';
+            leaf.innerText = leafSymbols[Math.floor(Math.random() * leafSymbols.length)];
+            leaf.style.left = Math.random() * 100 + 'vw';
+            leaf.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            leaf.style.opacity = Math.random() * 0.4 + 0.1;
+            document.getElementById('leaves-container').appendChild(leaf);
+            
+            setTimeout(() => leaf.remove(), 10000);
+        }
+        
+        setInterval(createLeaf, 1200);
+
+        function createConfetti() {
+            for(let i=0; i<30; i++) {
+                const heart = document.createElement('div');
+                heart.innerText = '💛';
+                heart.style.position = 'fixed';
+                heart.style.left = '50%';
+                heart.style.top = '70%';
+                heart.style.fontSize = '20px';
+                heart.style.transition = 'all 1s ease-out';
+                document.body.appendChild(heart);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 200 + 100;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+
+                setTimeout(() => {
+                    heart.style.transform = `translate(${tx}px, ${ty}px)`;
+                    heart.style.opacity = '0';
+                }, 10);
+                setTimeout(() => heart.remove(), 1000);
+            }
+        }
+    </script>
+</body>
+</html>
